@@ -84,7 +84,7 @@ function kibanaConfig(request, response) {
     "function (Settings) {",
     '  "use strict";',
     "  return new Settings({",
-    '    elasticsearch: "http://"+window.location.hostname+":"+window.location.port+"/__es",',
+    '    elasticsearch: "//" + window.location.hostname + ":" + window.location.port + "/__es",',
     "    default_route     : '/dashboard/file/default.json',",
     '    kibana_index: "kibana-int",',
     "    panel_names: [ 'histogram', 'map', 'pie', 'table', 'filtering', 'timepicker', 'text', 'hits', 'column', 'trends', 'bettermap', 'query', 'terms', 'stats', 'sparklines' ]",
