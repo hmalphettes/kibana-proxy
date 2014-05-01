@@ -18,7 +18,7 @@
   "license": "MIT",
   "copyright": "Sutoiku",
   "dependencies": {
-    "express": "*",
+    "express": "3.4.8",
     "passport": "*",
     "passport-google-oauth": "*",
     "connect-restreamer": "*"
