@@ -52,7 +52,7 @@ function configureApp(app, config) {
   configureESProxy(app, config.es_host, config.es_port,
             config.es_username, config.es_password);
 
-  app.use('/', express.static(__dirname + '/kibana'));
+  app.use('/', express.static(__dirname + '/kibana/src'));
   server = app.listen(config.port, /*"0.0.0.0",*/ function() {
     console.log('server listening on ' + config.port);
   });
@@ -79,14 +79,18 @@ function parseESURL(esurl, config) {
 
 function kibanaConfig(request, response) {
   //returns the javascript that is the config object. for kibana.
-  var responseBody = "var config = new Settings({\n" +
-  "elasticsearch: '//'+window.location.host+'/__es',\n" +
-  "kibana_index: 'kibana-int',\n" +
-  "modules: ['histogram','map','pie','table','filtering'," +
-            "'timepicker','text','fields','hits','dashcontrol',"+
-            "'column','derivequeries','trends','bettermap','query',"+
-            "'terms']\n" +
-  "});";
+  var responseBody = [
+    "define(['settings'],",
+    "function (Settings) {",
+    '  "use strict";',
+    "  return new Settings({",
+    '    elasticsearch: "//" + window.location.hostname + ":" + window.location.port + "/__es",',
+    "    default_route     : '/dashboard/file/default.json',",
+    '    kibana_index: "kibana-int",',
+    "    panel_names: [ 'histogram', 'map', 'pie', 'table', 'filtering', 'timepicker', 'text', 'hits', 'column', 'trends', 'bettermap', 'query', 'terms', 'stats', 'sparklines' ]",
+    "  });",
+    "});"
+  ].join("\n")
   response.setHeader('Content-Type', 'application/javascript');
   response.end(responseBody);
 }
