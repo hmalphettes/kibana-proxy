@@ -56,6 +56,11 @@ function configureApp(app, config) {
   server = app.listen(config.port, /*"0.0.0.0",*/ function() {
     console.log('server listening on ' + config.port);
   });
+
+  // a basic healchckeck for a load balancer
+  app.get('/healthcheck', function(req, res){
+    res.json({ "status": "ok" })
+  });
 }
 
 function parseESURL(esurl, config) {
