@@ -2,13 +2,14 @@
 applications:
 - name: kibana-on-cloudfoundry
   framework: node
-  runtime: node08
+  runtime: node10
   memory: 64M
   instances: 1
-  url: kibana-on-cloudfoundry.${target-base}
+  url: kibana-on-cloudfoundry.cfapps.io
+  command: node app
   path: .
   env:
-    ES_URL: 'http://user:password@your-elasticsearch.cloudfoundry.com'
+    ES_URL: 'http://user:password@your-elasticsearch.cfapps.io'
     APP_ID: ''
     APP_SECRET: ''
     AUTHORIZED_EMAILS: '*@sutoiku.com,hugues@stoic.cc'

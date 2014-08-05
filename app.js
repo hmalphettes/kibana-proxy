@@ -49,7 +49,7 @@ function configureApp(app, config) {
 
   app.get('/config.js', kibanaConfig);
 
-  configureESProxy(app, config.es_host, config.es_port,
+  configureESProxy(app, config.es_host, config.secure, config.es_port,
             config.es_username, config.es_password);
 
   app.use('/', express.static(__dirname + '/kibana/src'));
@@ -59,7 +59,7 @@ function configureApp(app, config) {
 
   // a basic healchckeck for a load balancer
   app.get('/healthcheck', function(req, res){
-    res.json({ "status": "ok" })
+    res.json({ "status": "ok" });
   });
 }
 
@@ -69,12 +69,13 @@ function parseESURL(esurl, config) {
 
   var secure = urlP.protocol === 'https:';
   if (urlP.port !== null && urlP.port !== undefined) {
-      config.es_port = urlP.port;
+    config.es_port = urlP.port;
   } else if (secure) {
-      config.es_port = '443';
+    config.es_port = '443';
   } else {
-      config.es_port = '80';
+    config.es_port = '80';
   }
+  config.secure = secure;
   if (urlP.auth) {
     var toks = urlP.auth.split(':');
     config.es_username = toks[0];
@@ -89,13 +90,13 @@ function kibanaConfig(request, response) {
     "function (Settings) {",
     '  "use strict";',
     "  return new Settings({",
-    '    elasticsearch: "//" + window.location.hostname + ":" + window.location.port + "/__es",',
+    '    elasticsearch: "//" + window.location.hostname + ( window.location.port ? ":" + window.location.port : "") + "/__es",',
     "    default_route     : '/dashboard/file/default.json',",
     '    kibana_index: "kibana-int",',
-    "    panel_names: [ 'histogram', 'map', 'pie', 'table', 'filtering', 'timepicker', 'text', 'hits', 'column', 'trends', 'bettermap', 'query', 'terms', 'stats', 'sparklines' ]",
+    "    panel_names: [ 'histogram', 'map', 'goal', 'table', 'filtering', 'timepicker', 'text', 'hits', 'column', 'trends', 'bettermap', 'query', 'terms', 'stats', 'sparklines' ]",
     "  });",
     "});"
-  ].join("\n")
+  ].join("\n");
   response.setHeader('Content-Type', 'application/javascript');
   response.end(responseBody);
 }
