@@ -10,6 +10,7 @@
  * Author: Hugues Malphettes.
  */
 
+var fs = require('fs');
 var parseUrl = require('url').parse;
 var express = require('express');
 var app = express();
@@ -52,7 +53,12 @@ function configureApp(app, config) {
   configureESProxy(app, config.es_host, config.secure, config.es_port,
             config.es_username, config.es_password);
 
-  app.use('/', express.static(__dirname + '/kibana/src'));
+  var kibanaPath = 'kibana-build';
+  if (fs.existsSync('kibana/src')) {
+    kibanaPath = 'kibana/src';
+  }
+
+  app.use('/', express.static(__dirname + '/' + kibanaPath));
   server = app.listen(config.port, /*"0.0.0.0",*/ function() {
     console.log('server listening on ' + config.port);
   });

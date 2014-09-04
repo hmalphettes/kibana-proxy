@@ -38,6 +38,12 @@ Configuration is done via environment variables:
     - `*@domain`: any email in the domain
     - `an@email`: a specific email.
 
+Docker Usage
+============
+```
+docker run -e APP_ID=abc APP_SECRET=def hmalphettes/kibana-proxy
+```
+
 Push to cloudfoundry.com
 ========================
 - Copy the `manifest-example.yml` file as `manifest-real.yml` provided as an example.
