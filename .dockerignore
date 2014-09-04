@@ -1,5 +1,5 @@
-.git
+.git/
 node_modules
 grafana/
 kibana/
-manisfest*
+manifest*

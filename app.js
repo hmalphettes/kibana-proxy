@@ -59,7 +59,7 @@ function configureApp(app, config) {
   }
 
   app.use('/', express.static(__dirname + '/' + kibanaPath));
-  server = app.listen(config.port, /*"0.0.0.0",*/ function() {
+  server = app.listen(config.port, "0.0.0.0", function() {
     console.log('server listening on ' + config.port);
   });
 
