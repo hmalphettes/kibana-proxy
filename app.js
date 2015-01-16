@@ -36,6 +36,15 @@ function createConfig() {
     config.appSecret = process.env.APP_SECRET;
     config.authorizedEmails = (process.env.AUTHORIZED_EMAILS || '*').split(',');
   }
+  if (process.env.OTHER_REVERSE_PROXIED) {
+    // for example for consul:
+    // {"/v1,/ui":{"host":"localhost","port":8500}}
+    try {
+      config.others = JSON.parse(process.env.OTHER_REVERSE_PROXIED);
+    } catch(x) {
+      console.error('Could not parse process.env.OTHER_REVERSE_PROXIED: ' + process.env.OTHER_REVERSE_PROXIED, x);
+    }
+  }
   // parse the url
   parseESURL(config.es_url, config);
 
@@ -51,7 +60,7 @@ function configureApp(app, config) {
   app.get('/config.js', kibanaConfig);
 
   configureESProxy(app, config.es_host, config.secure, config.es_port,
-            config.es_username, config.es_password);
+            config.es_username, config.es_password, config.others);
 
   var kibanaPath = 'kibana-build';
   if (fs.existsSync('kibana/src')) {
@@ -106,4 +115,3 @@ function kibanaConfig(request, response) {
   response.setHeader('Content-Type', 'application/javascript');
   response.end(responseBody);
 }
-
