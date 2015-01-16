@@ -11,3 +11,4 @@ html-report
 build
 cobertura-coverage.xml
 metadata
+kibana

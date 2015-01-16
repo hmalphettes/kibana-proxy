@@ -4,6 +4,7 @@
   "description": "Server tier for (kibana)[http://kibana.org/kibana3]; Proxies the calls to Elasticsearch and insert authentication.",
   "main": "app.js",
   "scripts": {
+    "install": "mkdir -p kibana; curl https://download.elasticsearch.org/kibana/kibana/kibana-3.1.2.tar.gz | tar xvzf - -C kibana --strip-components=1",
     "start": "node app",
     "test": ""
   },
