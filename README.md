@@ -37,6 +37,7 @@ Configuration is done via environment variables:
     - `*`: anything,
     - `*@domain`: any email in the domain
     - `an@email`: a specific email.
+- OTHER_REVERSE_PROXIED: optional: Proxy to other host. For example to proxy to the consul UI: '{"/v1,/ui":{"host":"localhost","port":8500}}'
 
 Docker Usage
 ============
