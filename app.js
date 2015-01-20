@@ -65,6 +65,8 @@ function configureApp(app, config) {
   var kibanaPath = 'kibana-build';
   if (fs.existsSync('kibana/src')) {
     kibanaPath = 'kibana/src';
+  } else if (fs.existsSync('kibana/index.html')) {
+    kibanaPath = 'kibana';
   }
 
   app.use('/', express.static(__dirname + '/' + kibanaPath));
