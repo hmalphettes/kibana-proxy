@@ -18,12 +18,9 @@ Usage
 
 ```
 git clone https://github.com/hmalphettes/kibana-proxy.git
-cd kibana-proxy/
-git submodule init
-git submodule update
 npm install
-node app.js &
-open http://localhost:3003
+npm start &
+open http://localhost:3003/index.html
 open http://localhost:3003/_plugin/head
 open http://localhost:3003/_plugin/bigdesk
 ```
