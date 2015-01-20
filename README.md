@@ -18,6 +18,7 @@ Usage
 
 ```
 git clone https://github.com/hmalphettes/kibana-proxy.git
+cd kibana-proxy/
 git submodule init
 git submodule update
 npm install
