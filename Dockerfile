@@ -3,7 +3,7 @@ MAINTAINER Hugues MALPHETTES <hmalphettes@gmail.com>
 
 WORKDIR /app
 ADD . /app
-RUN npm install
+RUN npm install --unsafe-perm
 
 EXPOSE 3003
 
