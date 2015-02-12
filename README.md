@@ -13,6 +13,14 @@ Front-ends specifically tested:
 - [Head](https://github.com/mobz/elasticsearch-head)
 - [Bigdesk](https://github.com/lukas-vlcek/bigdesk)
 
+Note regarding Kibana 4: it won't be supported here.
+----------------------------------------------------
+Kibana 4 requires its own web-tier; it processes the requests issued by the browser and then sends them to Elasticsearch.
+
+Reference: https://github.com/elasticsearch/kibana/issues/1628#issuecomment-58611294
+
+For Kibana 4 it seems an authentication plugin is what is needed to replace this proxy.
+
 Usage
 =====
 
