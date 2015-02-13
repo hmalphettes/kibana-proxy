@@ -21,7 +21,7 @@ Reference: https://github.com/elasticsearch/kibana/issues/1628#issuecomment-5861
 
 For Kibana 4 it seems an authentication plugin is what is needed to replace this proxy.
 
-In fact Kibana 4 is a NodeJS app since RC1. We should be able to plug our middleware for authentication is a sniffy!
+In fact Kibana 4 is a NodeJS app since RC1. We should be able to plug our middleware for authentication in a sniffy!
 
 Usage
 =====
