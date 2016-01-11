@@ -15,7 +15,10 @@ Front-ends specifically tested:
 
 Note regarding Kibana 4: it won't be supported here.
 ----------------------------------------------------
-Kibana 4 requires its own web-tier; it processes the requests issued by the browser and then sends them to Elasticsearch.
+
+Please use Elastic's Shield or contribute to https://github.com/hmalphettes/kibana-auth-plugin or wait for https://github.com/elastic/kibana/issues/3904
+
+Longer story: Kibana 4 requires its own web-tier; it processes the requests issued by the browser and then sends them to Elasticsearch.
 
 Reference: https://github.com/elasticsearch/kibana/issues/1628#issuecomment-58611294
 
